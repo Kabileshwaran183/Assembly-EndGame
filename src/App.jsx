@@ -2,16 +2,22 @@ import { languages } from "./languages"
 import { useState } from "react"
 import { clsx } from "clsx"
 function App() {
+  //state values
   const [word, setWord] = useState("kabi")
   const [guessedLetters, setGuessedLetters] = useState([])
-
-  const guessedWordCount =
+  //derived values
+  const wrongGuessCount =
     guessedLetters.filter(letter => !word.includes(letter)).length
-  console.log(guessedWordCount)
-  const alphabets = "qwertyuiopasdfghjklzxcvbnm"
-
+  const isGameWon =
+    word.split("").every(letter=>guessedLetters.includes(letter))
+  const isGameLoss =
+    wrongGuessCount >= languages.length -1
+  const isGameOver = isGameWon || isGameLoss
+    //static values
+    const alphabets = "qwertyuiopasdfghjklzxcvbnm"
+  
   const langElements = languages.map((lang, ind) => {
-    const isLostLang = ind < guessedWordCount
+    const isLostLang = ind < wrongGuessCount
     const styles = {
       backgroundColor: lang.backgroundColor,
       color: lang.color
@@ -86,7 +92,7 @@ function App() {
           {keyboard}
         </section>
 
-        <button className="newGame">New Game</button>
+        {isGameOver && <button className="newGame">New Game</button>}
 
       </main>
     </>
