@@ -73,6 +73,27 @@ function App() {
     won: isGameWon,
     lost: isGameLoss
 })
+function renderGameStatus() {
+  if (!isGameOver) {
+      return null
+  }
+
+  if (isGameWon) {
+      return (
+          <>
+              <h2>You win!</h2>
+              <p>Well done! 🎉</p>
+          </>
+      )
+  } else {
+      return (
+          <>
+              <h2>Game over!</h2>
+              <p>You lose! Better start learning Assembly 😭</p>
+          </>
+      )
+  }
+}
   return (
     <>
       <main>
@@ -82,22 +103,7 @@ function App() {
             programming world safe from Assembly!</p>
         </header>
         <section className={gameStatusClass}>
-                {isGameOver ? (
-                    isGameWon ? (
-                        <>
-                            <h2>You win!</h2>
-                            <p>Well done! 🎉</p>
-                        </>
-                    ) : (
-                        <>
-                            <h2>Game over!</h2>
-                            <p>You lose! Better start learning Assembly 😭</p>
-                        </>
-                    )
-                ) : ( 
-                        null
-                    )
-                }
+                {renderGameStatus()}
             </section>
         <section className="language">
           {langElements}
