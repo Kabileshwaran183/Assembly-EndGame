@@ -1,5 +1,6 @@
 import { languages } from "./languages"
 import { useState } from "react"
+import { clsx } from "clsx"
 function App() {
   const langElements = languages.map(lang => {
     const styles = {
@@ -15,12 +16,35 @@ const [word,setWord]=useState("kabi")
 const wordEl = word.split("").map(w=>(
   <span className="each-word">{w.toUpperCase()}</span>
 ))
-
+const [guessedLetters, setGuessedLetters]=useState([])
+function addGuessLetter(letter){
+  setGuessedLetters(prevLetters => 
+    prevLetters.includes(letter) ? 
+        prevLetters : 
+        [...prevLetters, letter]
+  )
+}
 const alphabets="qwertyuiopasdfghjklzxcvbnm"
-const keyboard= alphabets.split("").map((alp) => (
-  <button key={alp} className="key">{alp}</button>
-))
 
+const keyboard= alphabets.split("").map(letter => {
+  const isGuessed = guessedLetters.includes(letter)
+  const isCorrect = isGuessed && word.includes(letter)
+  const isWrong = isGuessed && !word.includes(letter)
+  const className = clsx({
+      correct: isCorrect,
+      wrong: isWrong
+  })
+  console.log(className)
+  return(
+  <button key={letter}
+          onClick={()=>addGuessLetter(letter)}
+          className={className}>
+                    {letter.toUpperCase()}     </button> )
+})
+
+
+
+console.log(guessedLetters)
 
   return (
     <>
