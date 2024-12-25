@@ -24,7 +24,6 @@ header > h1 {
 
 header > p {
   font-size: 0.875rem;
-  max-width: 350px;
   color: #8E8E8E;
 }
 section.game-status {
@@ -42,5 +41,15 @@ section.game-status > p {
 section.game-status > h2 {
     font-size: 1.25rem;
     margin: 2px;
+}
 
+section.lang-chips{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+span.chip {
+  padding:4.5px;
+  border-radius: 3px;
 }
