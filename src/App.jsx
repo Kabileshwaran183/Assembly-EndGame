@@ -69,7 +69,10 @@ function App() {
         [...prevLetters, letter]
     )
   }
-
+  const gameStatusClass = clsx("game-status", {
+    won: isGameWon,
+    lost: isGameLoss
+})
   return (
     <>
       <main>
@@ -78,10 +81,24 @@ function App() {
           <p>Guess the word within 8 attempts to keep the
             programming world safe from Assembly!</p>
         </header>
-        <section className="game-status">
-          <h2>YOU WIN ! </h2>
-          <p> well done! 🎉</p>
-        </section>
+        <section className={gameStatusClass}>
+                {isGameOver ? (
+                    isGameWon ? (
+                        <>
+                            <h2>You win!</h2>
+                            <p>Well done! 🎉</p>
+                        </>
+                    ) : (
+                        <>
+                            <h2>Game over!</h2>
+                            <p>You lose! Better start learning Assembly 😭</p>
+                        </>
+                    )
+                ) : ( 
+                        null
+                    )
+                }
+            </section>
         <section className="language">
           {langElements}
         </section>

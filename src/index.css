@@ -34,11 +34,11 @@ header > p {
   color: #8E8E8E;
 }
 section.game-status {
-    background-color: #10A95B;
     text-align: center;
     color: #F9F4DA;
     border-radius: 4px;
     max-width: 450px;
+    min-height: 60px;
     width:100%;
     padding:2px;
     margin-block: 30px;
@@ -51,7 +51,12 @@ section.game-status > h2 {
     font-size: 1.25rem;
     margin: 2px;
 }
-
+section.game-status.won{
+  background-color: #10A95B;
+}
+section.game-status.lost{
+  background-color: #a92f10;
+}
 section.language{
   display:flex;
   flex-wrap: wrap;
