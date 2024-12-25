@@ -69,7 +69,7 @@ section.word {
   gap:2px;
   margin-bottom: 40px;
 }
-section.word .each-word{
+section.word >span{
   width: 40px;
   height: 40px;
   background-color: rgb(70, 65, 65); 
@@ -77,6 +77,9 @@ section.word .each-word{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+section.word >span.found{
+  border-bottom: 0.5px solid #10A95B;
 }
 section.keyboard {
   display: flex;

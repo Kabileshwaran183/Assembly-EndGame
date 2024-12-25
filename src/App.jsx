@@ -16,9 +16,20 @@ function App() {
     )
   })
 
-  const wordEl = word.split("").map(w => {
+  const wordEl = word.split("").map((w, index) => {
+    const isFind = guessedLetters.includes(w)
+    const className = clsx({
+      found: isFind,
+      notFound: !isFind,
+    })
+  
     return (
-      <span className="each-word">{w.toUpperCase()}</span>
+      <span key={index} className={className}>
+        {isFind ? w.toUpperCase() : ""} 
+      </span>
+      // <span key={index}>
+      //{guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
+      //</span>  but we use className changeable...
     )
   })
 
@@ -30,12 +41,12 @@ function App() {
       correct: isCorrect,
       wrong: isWrong
     })
-    console.log(className)
     return (
       <button key={letter}
         onClick={() => addGuessLetter(letter)}
         className={className}>
-        {letter.toUpperCase()}     </button>)
+        {letter.toUpperCase()}
+      </button>)
   })
 
   function addGuessLetter(letter) {
