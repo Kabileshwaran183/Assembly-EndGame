@@ -4,15 +4,22 @@ import { clsx } from "clsx"
 function App() {
   const [word, setWord] = useState("kabi")
   const [guessedLetters, setGuessedLetters] = useState([])
+
+  const guessedWordCount =
+    guessedLetters.filter(letter => !word.includes(letter)).length
+  console.log(guessedWordCount)
   const alphabets = "qwertyuiopasdfghjklzxcvbnm"
 
-  const langElements = languages.map(lang => {
+  const langElements = languages.map((lang, ind) => {
+    const isLostLang = ind < guessedWordCount
     const styles = {
       backgroundColor: lang.backgroundColor,
       color: lang.color
     }
     return (
-      <span className="lang-box" style={styles}>{lang.name}</span>
+      <span className={clsx("language", { lost: isLostLang })} style={styles}>
+        {lang.name}
+      </span>
     )
   })
 
@@ -22,10 +29,10 @@ function App() {
       found: isFind,
       notFound: !isFind,
     })
-  
+
     return (
       <span key={index} className={className}>
-        {isFind ? w.toUpperCase() : ""} 
+        {isFind ? w.toUpperCase() : ""}
       </span>
       // <span key={index}>
       //{guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
@@ -69,7 +76,7 @@ function App() {
           <h2>YOU WIN ! </h2>
           <p> well done! 🎉</p>
         </section>
-        <section className="lang">
+        <section className="language">
           {langElements}
         </section>
         <section className="word">
