@@ -2,74 +2,74 @@ import { languages } from "./languages"
 import { useState } from "react"
 import { clsx } from "clsx"
 function App() {
+  const [word, setWord] = useState("kabi")
+  const [guessedLetters, setGuessedLetters] = useState([])
+  const alphabets = "qwertyuiopasdfghjklzxcvbnm"
+
   const langElements = languages.map(lang => {
     const styles = {
-        backgroundColor: lang.backgroundColor,
-        color: lang.color
+      backgroundColor: lang.backgroundColor,
+      color: lang.color
     }
     return (
-        <span className="lang-box" style={styles}>{lang.name}</span>
+      <span className="lang-box" style={styles}>{lang.name}</span>
     )
-})
+  })
 
-const [word,setWord]=useState("kabi")
-const wordEl = word.split("").map(w=>(
-  <span className="each-word">{w.toUpperCase()}</span>
-))
-const [guessedLetters, setGuessedLetters]=useState([])
-function addGuessLetter(letter){
-  setGuessedLetters(prevLetters => 
-    prevLetters.includes(letter) ? 
-        prevLetters : 
-        [...prevLetters, letter]
-  )
-}
-const alphabets="qwertyuiopasdfghjklzxcvbnm"
+  const wordEl = word.split("").map(w => {
+    return (
+      <span className="each-word">{w.toUpperCase()}</span>
+    )
+  })
 
-const keyboard= alphabets.split("").map(letter => {
-  const isGuessed = guessedLetters.includes(letter)
-  const isCorrect = isGuessed && word.includes(letter)
-  const isWrong = isGuessed && !word.includes(letter)
-  const className = clsx({
+  const keyboard = alphabets.split("").map(letter => {
+    const isGuessed = guessedLetters.includes(letter)
+    const isCorrect = isGuessed && word.includes(letter)
+    const isWrong = isGuessed && !word.includes(letter)
+    const className = clsx({
       correct: isCorrect,
       wrong: isWrong
+    })
+    console.log(className)
+    return (
+      <button key={letter}
+        onClick={() => addGuessLetter(letter)}
+        className={className}>
+        {letter.toUpperCase()}     </button>)
   })
-  console.log(className)
-  return(
-  <button key={letter}
-          onClick={()=>addGuessLetter(letter)}
-          className={className}>
-                    {letter.toUpperCase()}     </button> )
-})
 
-
-
-console.log(guessedLetters)
+  function addGuessLetter(letter) {
+    setGuessedLetters(prevLetters =>
+      prevLetters.includes(letter) ?
+        prevLetters :
+        [...prevLetters, letter]
+    )
+  }
 
   return (
     <>
       <main>
-            <header>
-                <h1>Assembly: Endgame</h1>
-                <p>Guess the word within 8 attempts to keep the 
-                programming world safe from Assembly!</p>
-            </header>
-            <section className="game-status">
-                <h2>YOU WIN ! </h2>
-                <p> well done! 🎉</p>
-            </section>
-            <section className="lang">
-                {langElements}
-            </section>
-            <section className="word">
-                {wordEl}
-            </section>
-            <section className="keyboard">
-              {keyboard}
-            </section>
-            
-              <button className="newGame">New Game</button>
-            
+        <header>
+          <h1>Assembly: Endgame</h1>
+          <p>Guess the word within 8 attempts to keep the
+            programming world safe from Assembly!</p>
+        </header>
+        <section className="game-status">
+          <h2>YOU WIN ! </h2>
+          <p> well done! 🎉</p>
+        </section>
+        <section className="lang">
+          {langElements}
+        </section>
+        <section className="word">
+          {wordEl}
+        </section>
+        <section className="keyboard">
+          {keyboard}
+        </section>
+
+        <button className="newGame">New Game</button>
+
       </main>
     </>
   )
