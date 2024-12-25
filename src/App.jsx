@@ -16,6 +16,12 @@ const wordEl = word.split("").map(w=>(
   <span className="each-word">{w.toUpperCase()}</span>
 ))
 
+const alphabets="qwertyuiopasdfghjklzxcvbnm"
+const keyboard= alphabets.split("").map((alp) => (
+  <button key={alp} className="key">{alp}</button>
+))
+
+
   return (
     <>
       <main>
@@ -34,6 +40,12 @@ const wordEl = word.split("").map(w=>(
             <section className="word">
                 {wordEl}
             </section>
+            <section className="keyboard">
+              {keyboard}
+            </section>
+            
+              <button className="newGame">New Game</button>
+            
       </main>
     </>
   )
