@@ -62,6 +62,8 @@ function App() {
       <button key={letter}
         onClick={() => addGuessLetter(letter)}
         disabled={isGameOver}
+        aria-disabled={guessedLetters.includes(letter)}
+        aria-label={`Letter ${letter}`}
         className={className}>
               {letter.toUpperCase()}
       </button>)
@@ -113,7 +115,9 @@ function renderGameStatus() {
           <p>Guess the word within 8 attempts to keep the
             programming world safe from Assembly!</p>
         </header>
-        <section className={gameStatusClass}>
+        <section aria-live="polite" 
+                role="status"
+                className={gameStatusClass}>
                 {renderGameStatus()}
             </section>
         <section className="language">
@@ -121,6 +125,15 @@ function renderGameStatus() {
         </section>
         <section className="word">
           {wordEl}
+        </section>
+        <section 
+                className="sr-only" 
+                aria-live="polite" 
+                role="status"
+                >
+                <p>Current word: {currentWord.split("").map(letter => 
+                guessedLetters.includes(letter) ? letter + "." : "blank.")
+                .join(" ")}</p>
         </section>
         <section className="keyboard">
           {keyboard}
