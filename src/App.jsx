@@ -131,7 +131,7 @@ function renderGameStatus() {
                 aria-live="polite" 
                 role="status"
                 >
-                <p>Current word: {currentWord.split("").map(letter => 
+                <p>Current word: {word.split("").map(letter => 
                 guessedLetters.includes(letter) ? letter + "." : "blank.")
                 .join(" ")}</p>
         </section>
