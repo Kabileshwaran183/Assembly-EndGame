@@ -2,6 +2,7 @@ import { languages } from "./languages"
 import { useState } from "react"
 import { clsx } from "clsx"
 import { getFarewellText,getRandomWord } from "./farewell"
+import Confetti from 'react-confetti'
 
 function App() {
   //state values
@@ -115,6 +116,12 @@ function startNewGame(){
 }
   return (
     <>
+      {isGameWon && <Confetti style={{
+                        position: "absolute",
+                        top: "40%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)", // Centering the confetti
+                    }}/> }
       <main>
         <header>
           <h1>Assembly: Endgame</h1>
