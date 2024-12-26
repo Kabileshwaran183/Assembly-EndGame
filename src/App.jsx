@@ -1,10 +1,11 @@
 import { languages } from "./languages"
 import { useState } from "react"
 import { clsx } from "clsx"
-import { getFarewellText } from "./farewell"
+import { getFarewellText,getRandomWord } from "./farewell"
+
 function App() {
   //state values
-  const [word, setWord] = useState("kabi")
+  const [word, setWord] = useState(getRandomWord())
   const [guessedLetters, setGuessedLetters] = useState([])
   //derived values
   const wrongGuessCount =

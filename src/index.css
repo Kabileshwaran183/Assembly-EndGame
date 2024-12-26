@@ -98,6 +98,7 @@ section.word {
   justify-content: center;
   gap:2px;
   margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 section.word >span{
   width: 40px;
