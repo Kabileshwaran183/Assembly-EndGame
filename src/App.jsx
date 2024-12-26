@@ -36,6 +36,7 @@ function App() {
 
   const wordEl = word.split("").map((w, index) => {
     const isFind = guessedLetters.includes(w)
+    const shouldReveal = isGameLoss || isFind
     const className = clsx({
       found: isFind,
       notFound: !isFind,
@@ -43,7 +44,7 @@ function App() {
 
     return (
       <span key={index} className={className}>
-        {isFind ? w.toUpperCase() : ""}
+        {shouldReveal ? w.toUpperCase() : ""}
       </span>
       // <span key={index}>
       //{guessedLetters.includes(letter) ? letter.toUpperCase() : ""}

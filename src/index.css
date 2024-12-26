@@ -112,6 +112,9 @@ section.word >span{
 section.word >span.found{
   border-bottom: 0.5px solid #10A95B;
 }
+section.word >span.notFound{
+  color: #EC5D49;
+}
 section.keyboard {
   display: flex;
   flex-wrap: wrap;
