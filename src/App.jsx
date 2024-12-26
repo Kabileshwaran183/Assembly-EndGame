@@ -108,6 +108,10 @@ function renderGameStatus() {
       )
   }
 }
+function startNewGame(){
+  setWord(getRandomWord())
+  setGuessedLetters([])
+}
   return (
     <>
       <main>
@@ -140,7 +144,7 @@ function renderGameStatus() {
           {keyboard}
         </section>
 
-        {isGameOver && <button className="newGame">New Game</button>}
+        {isGameOver && <button className="newGame" onClick={startNewGame}>New Game</button>}
 
       </main>
     </>
