@@ -116,7 +116,9 @@ function startNewGame(){
 }
   return (
     <>
-      {isGameWon && <Confetti style={{
+      {isGameWon && <Confetti numberOfPieces={120}
+                        gravity={0.08}
+                        style={{
                         position: "absolute",
                         top: "40%",
                         left: "50%",
