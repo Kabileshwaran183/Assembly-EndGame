@@ -1,7 +1,7 @@
 import { languages } from "./languages"
 import { useState } from "react"
 import { clsx } from "clsx"
-import { getFarewellText,getRandomWord } from "./farewell"
+import { getFarewellText, getRandomWord } from "./farewell"
 import Confetti from 'react-confetti'
 
 function App() {
@@ -12,16 +12,16 @@ function App() {
   const wrongGuessCount =
     guessedLetters.filter(letter => !word.includes(letter)).length
   const isGameWon =
-    word.split("").every(letter=>guessedLetters.includes(letter))
+    word.split("").every(letter => guessedLetters.includes(letter))
   const isGameLoss =
-    wrongGuessCount >= languages.length -1
+    wrongGuessCount >= languages.length - 1
   const isGameOver = isGameWon || isGameLoss
   const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
   const isLastGuessIncorrect = lastGuessedLetter && !word.includes(lastGuessedLetter)
-  
-    //static values
-    const alphabets = "qwertyuiopasdfghjklzxcvbnm"
-  
+
+  //static values
+  const alphabets = "qwertyuiopasdfghjklzxcvbnm"
+
   const langElements = languages.map((lang, ind) => {
     const isLostLang = ind < wrongGuessCount
     const styles = {
@@ -68,7 +68,7 @@ function App() {
         aria-disabled={guessedLetters.includes(letter)}
         aria-label={`Letter ${letter}`}
         className={className}>
-              {letter.toUpperCase()}
+        {letter.toUpperCase()}
       </button>)
   })
 
@@ -82,73 +82,73 @@ function App() {
   const gameStatusClass = clsx("game-status", {
     won: isGameWon,
     lost: isGameLoss,
-    farewell:!isGameLoss && isLastGuessIncorrect
-})
-function renderGameStatus() {
-  if (!isGameOver && isLastGuessIncorrect) {
+    farewell: !isGameLoss && isLastGuessIncorrect,
+    gif : !isGameLoss && !isLastGuessIncorrect && !isGameWon
+  })
+  function renderGameStatus() {
+    if (!isGameOver && isLastGuessIncorrect) {
       return (
         <p className="farewell-message">
-            {getFarewellText(languages[wrongGuessCount - 1].name)}
+          {getFarewellText(languages[wrongGuessCount - 1].name)}
         </p>
-        )
-  }
-
-  if (isGameWon) {
-      return (
-          <>
-              <h2>You win!</h2>
-              <p>Well done! 🎉</p>
-          </>
       )
-  }
-  if(isGameOver) {
+    }
+    if (isGameWon) {
       return (
-          <>
-              <h2>Game over!</h2>
-              <p>You lose! Better start learning Assembly 😭</p>
-          </>
+        <>
+          <h2>You win!</h2>
+          <p>Well done! 🎉</p>
+        </>
       )
+    }
+    if (isGameOver) {
+      return (
+        <>
+          <h2>Game over!</h2>
+          <p>You lose! Better start learning Assembly 😭</p>
+        </>
+      )
+    }
   }
-}
-function startNewGame(){
-  setWord(getRandomWord())
-  setGuessedLetters([])
-}
+  function startNewGame() {
+    setWord(getRandomWord())
+    setGuessedLetters([])
+  }
   return (
     <>
       {isGameWon && <Confetti numberOfPieces={120}
-                        gravity={0.08}
-                        style={{
-                        position: "absolute",
-                        top: "40%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)", // Centering the confetti
-                    }}/> }
+        gravity={0.08}
+        style={{
+          position: "absolute",
+          top: "40%",
+          left: "50%",
+          transform: "translate(-50%, -50%)", // Centering the confetti
+        }} />}
       <main>
         <header>
           <h1>Assembly: Endgame</h1>
           <p>Guess the word within 8 attempts to keep the
             programming world safe from Assembly!</p>
         </header>
-        <section aria-live="polite" 
-                role="status"
-                className={gameStatusClass}>
-                {renderGameStatus()}
-            </section>
+        <section aria-live="polite"
+          role="status"
+          className={gameStatusClass}>
+          {renderGameStatus()}
+        </section>
         <section className="language">
           {langElements}
         </section>
         <section className="word">
           {wordEl}
         </section>
-        <section 
-                className="sr-only" 
-                aria-live="polite" 
-                role="status"
-                >
-                <p>Current word: {word.split("").map(letter => 
-                guessedLetters.includes(letter) ? letter + "." : "blank.")
-                .join(" ")}</p>
+        <section
+          className="sr-only"
+          aria-live="polite"
+          role="status"
+        >
+          <p>Current word: {word.split("").map(letter =>
+            guessedLetters.includes(letter) ? letter + "." : "blank.")
+            .join(" ")}</p>
         </section>
         <section className="keyboard">
           {keyboard}
