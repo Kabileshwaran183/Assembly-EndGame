@@ -83,7 +83,7 @@ function App() {
     won: isGameWon,
     lost: isGameLoss,
     farewell: !isGameLoss && isLastGuessIncorrect,
-    gif : !isGameLoss && !isLastGuessIncorrect && !isGameWon
+    gif: !isGameLoss && !isLastGuessIncorrect && !isGameWon
   })
   function renderGameStatus() {
     if (!isGameOver && isLastGuessIncorrect) {
